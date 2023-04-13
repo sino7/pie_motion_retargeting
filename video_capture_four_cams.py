@@ -41,7 +41,7 @@ while True:
         # Check if the user pressed the enter key
         pressedKey = cv2.waitKey(1) & 0xFF
         
-        if pressedKey == cv2.ord('s') :
+        if pressedKey == ord('s') :
 
             print("'s' a été appuyé pour lancer l'enregistrement")
 
@@ -62,7 +62,7 @@ while True:
             for video in videos:
                 video.release()
 
-        elif pressedKey == 'q':
+        elif pressedKey == ord('q'):
             print("'q' a été appuyé pour quitter")
             break
     
