@@ -8,13 +8,15 @@ cap2 = cv2.VideoCapture(2, cv2.CAP_DSHOW)
 cap3 = cv2.VideoCapture(3, cv2.CAP_DSHOW)
 caps = [cap0, cap1, cap2, cap3]
 
-width = int(cap1.get(3))//2
-height = int(cap1.get(4))//2
-size = (width, height)
+sizes = []
 
 for cap in caps:
+    width = int(cap.get(3))//2
+    height = int(cap.get(4))//2
+    size = (width, height)
     cap.set(3, width)
     cap.set(4, height)
+    sizes.append(size)
     
 # Compression
 lossless = cv2.VideoWriter_fourcc(* 'MJPG')
@@ -46,7 +48,7 @@ while True:
             # Save the frames as video files
             base_name = str(int(time.time()))
             file_names = [base_name + '_cam'+str(i) +'.avi' for i in range(len(caps))]
-            videos = [cv2.VideoWriter(file_name, lossless, 30, size) for file_name in file_names]
+            videos = [cv2.VideoWriter(file_name, lossless, 30, size) for (file_name, size) in zip(file_names, sizes)]
             recording = True
 
         if recording:
